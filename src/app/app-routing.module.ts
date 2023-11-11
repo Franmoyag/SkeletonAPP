@@ -13,7 +13,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'listar-alumnos',
+    loadChildren: () => import('./pages/listar-alumnos/listar-alumnos.module').then( m => m.ListarAlumnosPageModule)
+  },
+  {
+    path: 'agregar-alumnos',
+    loadChildren: () => import('./pages/agregar-alumnos/agregar-alumnos.module').then( m => m.AgregarAlumnosPageModule)
   },
 ];
 
