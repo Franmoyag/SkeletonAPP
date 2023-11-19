@@ -24,22 +24,22 @@
   <ion-searchbar placeholder="Buscar Alumno"></ion-searchbar>
 
   <ion-list>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let x of arregloAlumnos">
 
       <ion-item>
         <ion-label>
-          <h2>{{nombreAlumnoRecibido | uppercase}}</h2>
-          <p style="word-wrap: break-word; white-space: normal;">{{rutAlumnoRecibido}}, {{generoAlumnoRecibido | uppercase}}</p>
+          <h2>{{x.nombre | uppercase}}</h2>
+          <p style="word-wrap: break-word; white-space: normal;">{{x.rut}}, {{x.genero | uppercase}}, {{x.direccion | uppercase}},{{x.comuna | uppercase}}</p>
         </ion-label>
       </ion-item>
 
       <ion-item-options>
-        <ion-item-option>
+        <ion-item-option (click)="modificar(x)">
           <ion-icon slot="bottom" name="pencil-sharp"></ion-icon>
           Modificar
         </ion-item-option>
 
-        <ion-item-option color="danger">
+        <ion-item-option color="danger" (click)="eliminar(x)">
           <ion-icon slot="bottom" name="trash"></ion-icon>
           Eliminar
         </ion-item-option>
@@ -48,6 +48,12 @@
 
     </ion-item-sliding>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fav-button [routerLink]="['/agregar-alumnos']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fav-button>
+  </ion-fab>
 
   
 

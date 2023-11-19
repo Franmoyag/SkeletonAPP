@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { ServicioDBService } from 'src/app/services/servicio-db.service';
+
 
 @Component({
   selector: 'app-listar-alumnos',
@@ -8,21 +10,50 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListarAlumnosPage implements OnInit {
 
-  nombreAlumnoRecibido: string ="";
-  rutAlumnoRecibido: string ="";
-  generoAlumnoRecibido: string ="";
+  arregloAlumnos: any = [
+    {
+      rut: '',
+      nombre: '',
+      direccion: '',
+      comuna: '',
+      genero: ''
+    }
+    
+  ]
 
-  constructor(private activerouter: ActivatedRoute, private router: Router) { 
-    this.activerouter.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation()?.extras?.state){
-        this.nombreAlumnoRecibido = this.router.getCurrentNavigation()?.extras?.state?.['nombreAlumnoEnviado'];
-        this.rutAlumnoRecibido = this.router.getCurrentNavigation()?.extras?.state?.['rutAlumnoEnviado'];
-        this.generoAlumnoRecibido = this.router.getCurrentNavigation()?.extras?.state?.['generoAlumnoEnviado'];
+  constructor(private router: Router, private servicioBD: ServicioDBService) { }
+
+  ngOnInit() {
+
+    this.servicioBD.dbState().subscribe(res => {
+      if ( res ) {
+        this.servicioBD.fetchAlumnos().subscribe(item => {
+          this.arregloAlumnos = item;
+        })
       }
     })
   }
 
-  ngOnInit() {
+
+  modificar (x: any){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        rutAlumnoEnviado: x.rut,
+        nombreAlumnoEnviado: x.nombre,        
+        direccionAlumnoEnviado : x.direccion,
+        comunaAlumnoEnviado: x.comuna,
+        generoAlumnoEnviado: x.genero 
+
+      }
+    }
+    this.router.navigate(['/modifical-alumnos'], navigationExtras);
+  }
+
+
+
+  eliminar(x: any) {
+    this.servicioBD.eliminarAlumnos(x.rut);
+    this.servicioBD.presentToast ("Alumno Eliminado");
   }
 
 }
