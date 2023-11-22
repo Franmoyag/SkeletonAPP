@@ -18,10 +18,11 @@ export class ModificarPage implements OnInit {
   constructor(private router: Router, private activedRouter: ActivatedRoute, private servicio: ServicioDBService) {
     this.activedRouter.queryParamMap.subscribe(param => {
       if(this.router.getCurrentNavigation()?.extras.state){
+        this.rut = this.router.getCurrentNavigation()?.extras?.state?.['rutAlumnoEnviado'];
         this.nombre = this.router.getCurrentNavigation()?.extras?.state?.['nombreAlumnoEnviado'];
         this.direccion = this.router.getCurrentNavigation()?.extras?.state?.['direccionAlumnoEnviado'];
         this.comuna = this.router.getCurrentNavigation()?.extras?.state?.['comunaAlumnoEnviado'];
-        this.genero = this.router.getCurrentNavigation()?.extras?.state?.['generoAlumnoEnviado']
+        this.genero = this.router.getCurrentNavigation()?.extras?.state?.['generoAlumnoEnviado'];
       }
     })
   }

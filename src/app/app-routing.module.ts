@@ -22,14 +22,14 @@ const routes: Routes = [
   {
     path: 'agregar-alumnos',
     loadChildren: () => import('./pages/agregar-alumnos/agregar-alumnos.module').then( m => m.AgregarAlumnosPageModule)
+  }, 
+  {
+    path: 'modificar',
+    loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },
-  {
-    path: 'modificar',
-    loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarPageModule)
   },
 ];
 
