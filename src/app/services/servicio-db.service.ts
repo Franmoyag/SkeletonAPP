@@ -113,11 +113,12 @@ insertarAlumnos(rut: any, nombre: any, direccion: any, comuna: any, sexo: any){
 
 
 modificarAlumnos(rut: any, nombre: any, direccion: any, comuna: any, sexo: any){
-  let data = [nombre, direccion, comuna, sexo, rut];
+  let data = [rut, nombre, direccion, comuna, sexo];
   return this.database.executeSql('UPDATE alumnos SET nombre_alumno = ?, direccion_alumno = ?, comuna_alumno = ?, sexo_alumno = ? WHERE rut_alumno = ?', data).then (data2 =>{
     this.buscarAlumnos();
   })
 }
+  
 
 
 eliminarAlumnos(rut: any){

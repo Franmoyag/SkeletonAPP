@@ -29,7 +29,7 @@
       <ion-item>
         <ion-label>
           <h2>{{x.nombre | uppercase}}</h2>
-          <p style="word-wrap: break-word; white-space: normal;">{{x.rut}}, {{x.genero | uppercase}}, {{x.direccion | uppercase}},{{x.comuna | uppercase}}</p>
+          <p style="word-wrap: break-word; white-space: normal;">{{x.rut}}, {{x.genero}}, {{x.direccion | uppercase}},{{x.comuna | uppercase}}</p>
         </ion-label>
       </ion-item>
 
@@ -50,9 +50,9 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fav-button [routerLink]="['/agregar-alumnos']">
-      <ion-icon name="add"></ion-icon>
-    </ion-fav-button>
+    <ion-fab-button [routerLink]="['/agregar-alumnos']">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 
   

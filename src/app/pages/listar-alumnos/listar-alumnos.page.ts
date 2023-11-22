@@ -16,7 +16,7 @@ export class ListarAlumnosPage implements OnInit {
       nombre: '',
       direccion: '',
       comuna: '',
-      genero: ''
+      genero: '',
     }
     
   ]
@@ -36,7 +36,7 @@ export class ListarAlumnosPage implements OnInit {
 
 
   modificar (x: any){
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
         rutAlumnoEnviado: x.rut,
         nombreAlumnoEnviado: x.nombre,        
@@ -46,7 +46,7 @@ export class ListarAlumnosPage implements OnInit {
 
       }
     }
-    this.router.navigate(['/modifical-alumnos'], navigationExtras);
+    this.router.navigate(['/modificar'], navigationExtras);
   }
 
 
