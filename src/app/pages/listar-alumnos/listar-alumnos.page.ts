@@ -8,6 +8,8 @@ import { ServicioDBService } from 'src/app/services/servicio-db.service';
   templateUrl: './listar-alumnos.page.html',
   styleUrls: ['./listar-alumnos.page.scss'],
 })
+
+
 export class ListarAlumnosPage implements OnInit {
 
   arregloAlumnos: any = [
@@ -57,3 +59,5 @@ export class ListarAlumnosPage implements OnInit {
   }
 
 }
+
+

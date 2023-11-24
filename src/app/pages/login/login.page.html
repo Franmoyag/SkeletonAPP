@@ -13,13 +13,15 @@
     <ion-img src="assets/images/Portada.svg"></ion-img>
     <ion-item>
       <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText=""
-        errorText="Coreo Inválido" ngModel email></ion-input>
+        errorText="Coreo Inválido" [(ngModel)]="email" placeholder="usuario@duoc.cl"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-input type="password" fill="solid" label="Contraseña" labelPlacement="floating" placeholder="Abc123"></ion-input>
+      <ion-input type="password" fill="solid" label="Contraseña" labelPlacement="floating" [(ngModel)]="password" placeholder="Abc123"></ion-input>
     </ion-item>  
   </div>
+
+  <ion-button class="ion-margin-top" expand="block" (click)="onLogin()">Ingresar</ion-button>
 
 
   
