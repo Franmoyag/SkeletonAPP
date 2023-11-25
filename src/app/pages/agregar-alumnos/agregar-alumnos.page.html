@@ -50,6 +50,12 @@
     </ion-select>
   </ion-item>
 
+
+  <div>
+    <ion-button (click)="takePicture()">Agregar Foto</ion-button>
+    <img *ngIf="imageSource" src="{{imageSource}}" alt="image" style="width: 100%; max-width: 200px;">
+  </div>
+  
   
 <ion-button shape="block" (click)="enviarDatos()">Guardar Cambios</ion-button>
 
