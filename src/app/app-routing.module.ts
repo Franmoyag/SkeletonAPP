@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'apirest',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

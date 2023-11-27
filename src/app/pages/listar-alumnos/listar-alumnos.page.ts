@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ServicioDBService } from 'src/app/services/servicio-db.service';
 
+import { Geolocation } from '@capacitor/geolocation';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-listar-alumnos',
@@ -23,7 +26,7 @@ export class ListarAlumnosPage implements OnInit {
     
   ]
 
-  constructor(private router: Router, private servicioBD: ServicioDBService) { }
+  constructor(private toastController: ToastController  ,private router: Router, private servicioBD: ServicioDBService) { }
 
   ngOnInit() {
 
@@ -56,6 +59,28 @@ export class ListarAlumnosPage implements OnInit {
   eliminar(x: any) {
     this.servicioBD.eliminarAlumnos(x.rut);
     this.servicioBD.presentToast ("Alumno Eliminado");
+  }
+
+
+  async obtenerMiUbicacion(){
+
+    let ubicacion = await Geolocation.getCurrentPosition();
+
+    let ubicacionTexto = "Latitud: "+ubicacion.coords.latitude +" Longitud: "+ ubicacion.coords.longitude
+    console.log (ubicacion)
+
+    this.mostratToast(ubicacionTexto)
+
+  }
+
+  async mostratToast(mensaje: any) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      position: 'top'
+    });
+
+    await toast.present();
   }
 
 }
