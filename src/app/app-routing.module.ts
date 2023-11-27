@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'apirest',
     pathMatch: 'full'
   },
   {
@@ -28,13 +28,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarPageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },
-  {
     path: 'apirest',
     loadChildren: () => import('./pages/apirest/apirest.module').then( m => m.ApirestPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  
 ];
 
 @NgModule({

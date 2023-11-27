@@ -9,10 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx'
 
+import { HttpClientModule } from '@angular/common/http'
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [HttpClientModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite],
   bootstrap: [AppComponent],
 })
