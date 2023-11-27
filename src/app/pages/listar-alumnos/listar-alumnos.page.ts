@@ -5,6 +5,8 @@ import { ServicioDBService } from 'src/app/services/servicio-db.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { ToastController } from '@ionic/angular';
 
+import { Alumnos } from 'src/app/services/alumnos';
+
 
 @Component({
   selector: 'app-listar-alumnos',
@@ -15,18 +17,10 @@ import { ToastController } from '@ionic/angular';
 
 export class ListarAlumnosPage implements OnInit {
 
-  arregloAlumnos: any = [
-    {
-      rut: '',
-      nombre: '',
-      direccion: '',
-      comuna: '',
-      genero: '',
-    }
-    
-  ]
+  arregloAlumnos: Alumnos[ ] = [ ];
 
-  constructor(private toastController: ToastController  ,private router: Router, private servicioBD: ServicioDBService) { }
+
+  constructor(private toastController: ToastController  ,private router: Router, private servicioBD: ServicioDBService) {}
 
   ngOnInit() {
 
@@ -38,6 +32,23 @@ export class ListarAlumnosPage implements OnInit {
       }
     })
   }
+
+  filtrarAlumnos(event: any) {
+    const textoBusqueda = event.target.value.toLowerCase();
+    this.servicioBD.buscarAlumnos();
+  
+    // Filtra localmente la lista según el texto de búsqueda
+    this.servicioBD.listaAlumnos.subscribe((alumnos: Alumnos[]) => {
+      const alumnosFiltrados = alumnos.filter(
+        (alumno) =>
+          alumno.nombre.toLowerCase().includes(textoBusqueda) ||
+          alumno.rut.toLowerCase().includes(textoBusqueda)
+      );
+      this.arregloAlumnos = alumnosFiltrados;
+    });
+  }
+
+
 
 
   modificar (x: any){

@@ -25,9 +25,10 @@
     <ion-button id="center" (click)="obtenerMiUbicacion()">Obtener Mi Ubicacion</ion-button>
   </div>
 
-  <ion-searchbar placeholder="Buscar Alumno"></ion-searchbar>
+  <ion-searchbar placeholder="Buscar Alumno" (ionInput)="filtrarAlumnos($event)"></ion-searchbar>
 
   <ion-list>
+    
     <ion-item-sliding *ngFor="let x of arregloAlumnos">
 
       <ion-item>

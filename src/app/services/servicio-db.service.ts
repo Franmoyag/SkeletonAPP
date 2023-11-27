@@ -80,7 +80,7 @@ export class ServicioDBService {
   buscarAlumnos() {
     return this.database.executeSql('SELECT * FROM alumnos', []).then((res) => {
       let items: Alumnos[] = [];
-
+  
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
@@ -92,6 +92,7 @@ export class ServicioDBService {
           });
         }
       }
+  
       this.listaAlumnos.next(items as any);
     });
   }
@@ -104,28 +105,47 @@ export class ServicioDBService {
     return this.listaAlumnos.asObservable();
   }
 
-insertarAlumnos(rut: any, nombre: any, direccion: any, comuna: any, sexo: any){
-  let data = [rut, nombre, direccion, comuna, sexo];
-  return this.database.executeSql('INSERT INTO alumnos (rut_alumno, nombre_alumno, direccion_alumno, comuna_alumno, sexo_alumno) VALUES (?,?,?,?,?)',data).then (res =>{
-    this.buscarAlumnos();
-  });
-}
+  insertarAlumnos(
+    rut: any,
+    nombre: any,
+    direccion: any,
+    comuna: any,
+    sexo: any
+  ) {
+    let data = [rut, nombre, direccion, comuna, sexo];
+    return this.database
+      .executeSql(
+        'INSERT INTO alumnos (rut_alumno, nombre_alumno, direccion_alumno, comuna_alumno, sexo_alumno) VALUES (?,?,?,?,?)',
+        data
+      )
+      .then((res) => {
+        this.buscarAlumnos();
+      });
+  }
 
+  modificarAlumnos(
+    rut: any,
+    nombre: any,
+    direccion: any,
+    comuna: any,
+    sexo: any
+  ) {
+    let data = [nombre, direccion, comuna, sexo, rut];
+    return this.database
+      .executeSql(
+        'UPDATE alumnos SET nombre_alumno = ?, direccion_alumno = ?, comuna_alumno = ?, sexo_alumno = ? WHERE rut_alumno = ?',
+        data
+      )
+      .then((data2) => {
+        this.buscarAlumnos();
+      });
+  }
 
-modificarAlumnos(rut: any, nombre: any, direccion: any, comuna: any, sexo: any){
-  let data = [ nombre, direccion, comuna, sexo,rut];
-  return this.database.executeSql('UPDATE alumnos SET nombre_alumno = ?, direccion_alumno = ?, comuna_alumno = ?, sexo_alumno = ? WHERE rut_alumno = ?', data).then (data2 =>{
-    this.buscarAlumnos();
-  })
-}
-  
-
-
-eliminarAlumnos(rut: any){
-  return this.database.executeSql('DELETE FROM alumnos WHERE rut_alumno = ?', [rut]).then(a =>{
-    this.buscarAlumnos();
-  })
-}
-
-
+  eliminarAlumnos(rut: any) {
+    return this.database
+      .executeSql('DELETE FROM alumnos WHERE rut_alumno = ?', [rut])
+      .then((a) => {
+        this.buscarAlumnos();
+      });
+  }
 }
